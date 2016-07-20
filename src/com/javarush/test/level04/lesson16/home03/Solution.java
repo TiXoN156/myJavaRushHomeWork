@@ -7,35 +7,52 @@ import java.io.*;
 завершить программу.  -1 должно учитываться в сумме.
 */
 
+// ОДИН ХРЕН НЕ ПРОШЛА ТЕСТИРОВАНИЕ ;)
+
 public class Solution
 {
     public static void main(String[] args)   throws Exception {
+
         // Первое: idea подчеркивает summ правильнее будет sum
-        int summ = 0;
+
+        double sum = 0;
+        boolean exit = false;
+
+        // Третье: ты создаешь reader в цикле постоянно (этого делать не нужно)
+        // Правило все что можно вынести наружу цикла должно быть вынесео наружу
+
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
         // Второе: сдесь лучше использовать цикл do {} while (Переделй с другим циклом)
-        for (boolean exit = false; !exit; ) {
-            // Третье: ты создаешь reader в цикле постоянно (этого делать не нужно)
-            // Правило все что можно вынести наружу цикла должно быть вынесео наружу
-            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-            String s = reader.readLine();
-            // Четвертое: Обрати внимание что произойдет в случае если ты введешь не корректное значение
-            // произойдет исключение NumberFormatException и выполнение программы завершится
-            // Всегда проверяй на корректность ввода используй try {} catch (NumberFormatException) {}
-            // Две следующие строчки можно записать в виде одной
-            // пример:
-            // float b = Float.parseFloat("10.0");
-            // sum = sum + b;
-            // превратиться в
-            // sum += Float.parseFloat("10.0");
-            // старайся использовать запись a += b вместо a = a + b;
-            int a = Integer.parseInt(s);
-            summ = summ + a;
+        // При использование цикла do while эта запись перейдет в условие цикла и ты избавишься от лишней переменной
+        //for (boolean exit = false; !exit; )
 
-            // При использование цикла do while эта запись перейдет в условие цикла и ты избавишься от лишней переменной
-            exit = a == -1;
+        do
+        {
+            try
+            {
+                String s = reader.readLine();
+
+                // Четвертое: Обрати внимание что произойдет в случае если ты введешь не корректное значение
+                // произойдет исключение NumberFormatException и выполнение программы завершится
+                // Всегда проверяй на корректность ввода используй try {} catch (NumberFormatException) {}
+                // Две следующие строчки можно записать в виде одной
+                // пример:
+                // float b = Float.parseFloat("10.0");
+                // sum = sum + b;
+                // превратиться в
+                // sum += Float.parseFloat("10.0");
+                // старайся использовать запись a += b вместо a = a + b;
+
+                sum += Double.parseDouble(s);
+                exit = Double.parseDouble(s) != -1;
+            }
+            catch (NumberFormatException e){
+                System.out.println("Неверный ввод, введите число.");
+            }
         }
+        while (!exit); // Сюда нельзя вставить проверку равно ли -1 значение Double.parseDouble(s), поэтому оставил переменную exit
 
-        System.out.println(summ);
+        System.out.println(sum);
     }
 }
