@@ -8,6 +8,7 @@ import java.io.*;
 */
 
 // ОДИН ХРЕН НЕ ПРОШЛА ТЕСТИРОВАНИЕ ;)
+// Тест
 
 public class Solution
 {
